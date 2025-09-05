@@ -1,13 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Szamologep;
-
 internal class Program
-{   
-   
+{
+
 
     //static void Settings()
     //{
@@ -17,7 +15,7 @@ internal class Program
     //    Console.WriteLine("------------Készítette: Haltiru------------");
     //    Console.WriteLine("---------A kilépéshez nyomj: 'k'-t---------");
     //    Console.WriteLine("----A visszalépéshez nyomj 'backspace'-t----");
-    
+
     //}
     static void Main(string[] args)
     {
@@ -34,8 +32,8 @@ internal class Program
             string input = "0";
             string muvelet = "";
             string input2 = "0";
-            List<string> kilepes = ["kilépés", "kilepes", "exit", "ex"];
-
+            List<string> kilepes = new List<string> { "kilépés", "kilepes", "exit", "ex" };
+            List<string> muveletek = new List<string> { "+", "-", "*", "/", "^", "pow", "hatvany", "maradékos osztás","%", };
             input = Console.ReadLine();
             //ConsoleKeyInfo keyInfo = Console.ReadKey(true); // true = nem írja ki a karaktert
 
@@ -45,7 +43,7 @@ internal class Program
             //}
             if (kilepes.Contains(input.ToLower()))
             {
-            break;
+                break;
             }
             if (!double.TryParse(input, out double szam1))
             {
@@ -55,19 +53,19 @@ internal class Program
                 continue;
             }
 
-            Console.Write("Add meg a műveletet (+, -, *, /): ");
+            Console.Write("Add meg a műveletet (+, -, *, /, ^, %): ");
             muvelet = Console.ReadLine();
             if (kilepes.Contains(muvelet.ToLower()))
             {
                 break;
             }
 
-            if (muvelet != "+" && muvelet != "-" && muvelet != "*" && muvelet != "/")
+            if (!muveletek.Contains(muvelet.ToLower()))
             {
                 Console.WriteLine("Hibás művelet, csak +, -, * vagy / lehet!");
                 Console.ReadKey();
                 Console.Clear();
-                continue; // vissza a ciklus elejére
+                continue;
             }
             Console.Write("Add meg a második számot: ");
 
@@ -82,7 +80,7 @@ internal class Program
                 Console.WriteLine("Hibás adat, számot kell megadni!");
                 Console.ReadKey();
                 Console.Clear();
-                continue; // vissza a ciklus elejére
+                continue;
             }
             double eredmeny = 0;
             switch (muvelet)
@@ -90,7 +88,8 @@ internal class Program
                 case "+": eredmeny = szam1 + szam2; break;
                 case "-": eredmeny = szam1 - szam2; break;
                 case "*": eredmeny = szam1 * szam2; break;
-                case "/": eredmeny = szam1 / szam2;
+                case "/":
+                    eredmeny = szam1 / szam2;
                     if (szam2 == 0)
                     {
                         Console.WriteLine("Nullával nem lehet osztani!");
@@ -100,11 +99,19 @@ internal class Program
                     }
                     eredmeny = szam1 / szam2;
                     break;
+                case "^": eredmeny = (Math.Pow(szam1, szam2)); break;
+                case "pow": eredmeny = (Math.Pow(szam1, szam2)); break;
+                case "%": eredmeny = eredmeny = szam1 % szam2; break;
+                    ;
             }
-            Console.WriteLine($"A művelet eredménye: {szam1} {muvelet} {szam2} = {eredmeny}");
+            switch (muvelet)
+            {
+                case "pow": Console.WriteLine($"A művelet eredménye: {szam1} ^ {szam2} = {eredmeny}"); break;
+                default: Console.WriteLine($"A művelet eredménye: {szam1} {muvelet} {szam2} = {eredmeny}"); break;
+            }
             Console.ReadKey();
             Console.Clear();
         }
-        
+
     }
 }
