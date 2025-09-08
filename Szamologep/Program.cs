@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 
 internal class Program
 
-{   static int Alltipp = 0;
+{
+    static int Alltipp = 0;
     static string beallitasokFile = "beallitasok.json";
     static string ver = "0.1.0";
     class Beallitasok
@@ -121,7 +122,8 @@ internal class Program
             Console.WriteLine("|-------------| Készítette: Haltiru |-------------|");
             Console.WriteLine();
             Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] Írj be egy számot 1 és 20 között!");
-            if (tipp != 0) {
+            if (tipp != 0)
+            {
                 Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] Eddig {tipp} tippeltél!");
             }
             if (Alltipp != 0)
